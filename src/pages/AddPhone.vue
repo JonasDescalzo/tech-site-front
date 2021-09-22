@@ -19,7 +19,7 @@
         <q-input
             filled
             type="number"
-            v-model="age"
+            v-model="price"
             label="Price"
             lazy-rules
             :rules="[
@@ -29,11 +29,25 @@
 
          <q-input
             filled
+            type="number"
             v-model="brand"
             label="Brand"
             lazy-rules
             :rules="[ val => val && val.length > 0 || 'Please type the brand']"
         />
+
+        <!-- <q-select 
+          standout="bg-teal text-white" 
+          v-model="brand" 
+          :options="options" 
+          label="Brand" 
+        /> -->
+
+        <!-- <q-select 
+          standout="bg-teal text-white" 
+          v-model="brand" 
+          label="Brand" 
+        /> -->
         
 
         <div>
@@ -50,42 +64,44 @@
 <script>
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
+import { addPhone } from 'src/api/api'
+/* import { testPost } from 'src/api/api' */
+
 
 export default {
   setup () {
     const $q = useQuasar()
 
     const name = ref(null)
-    const age = ref(null)
-    const brand = ref(null)
+    const price = ref(null)
+    const brand = ref()
+
+    //function to add phones
+    const addNewPhone = async () => {
+      const request = {"ModelName": name.value, "Price": price.value, "BrandId" : brand.value};
+      
+      addPhone(request).then((res) => {
+        if(res.status === 200)
+        {
+          console.log(res.data)
+        }
+      })
+    }
 
     return {
       name,
-      age,
+      price,
       brand,
+      options: ['Honor', 'Cherry Mobile', 'Infinix', 'Realme'
+      ],
 
       onSubmit () {
-        if (brand.value !== true) {
-          $q.notify({
-            color: 'red-5',
-            textColor: 'white',
-            icon: 'warning',
-            message: 'You need to accept the license and terms first'
-          })
-        }
-        else {
-          $q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Submitted'
-          })
-        }
+        addNewPhone()
       },
 
       onReset () {
         name.value = null
-        age.value = null
+        price.value = null
         brand.value = null
       }
     }

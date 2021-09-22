@@ -10,13 +10,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 import { getAllPhones } from 'src/api/api'
 import { ref } from 'vue'
 import SinglePhone from '../components/SinglePhone.vue'
-import AddPhoneButton from '../components/AddPhoneButton.vue'
-
-
 
 export default defineComponent({
   name: 'PageIndex',
@@ -24,9 +21,13 @@ export default defineComponent({
   setup () {
     const phones = ref([])
 
+    onMounted(() => {
+      console.log('mounted!')
+    })
+
     //function to get all phones
     const getPhones = async () => {
-      const response = await getAllPhones()
+      //const response = await getAllPhones()
       
       getAllPhones().then((res) => {
         if(res.status === 200)
