@@ -1,9 +1,12 @@
 <template>
+
+  <!-- phone list -->
   <q-page class="flex flex-center">
     <div v-for="phone in phones" :key="phone">
       <SinglePhone :phone="phone"/>   
     </div>
   </q-page>
+
 </template>
 
 <script>
@@ -11,6 +14,7 @@ import { defineComponent } from 'vue';
 import { getAllPhones } from 'src/api/api'
 import { ref } from 'vue'
 import SinglePhone from '../components/SinglePhone.vue'
+import AddPhoneButton from '../components/AddPhoneButton.vue'
 
 
 
@@ -32,7 +36,7 @@ export default defineComponent({
       })
     }
 
-    getPhones()
+     getPhones()
 
     return{ phones }
   }
