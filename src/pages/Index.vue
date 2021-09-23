@@ -22,7 +22,7 @@ export default defineComponent({
     const phones = ref([])
 
     onMounted(() => {
-      console.log('mounted!')
+      console.log('Home Page')
     })
 
     //function to get all phones
