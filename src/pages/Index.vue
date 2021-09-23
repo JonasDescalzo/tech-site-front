@@ -3,7 +3,7 @@
   <!-- phone list -->
   <q-page class="flex flex-center">
     <div v-for="phone in phones" :key="phone">
-      <SinglePhone :phone="phone"/>   
+      <SinglePhone :_phone="phone"/>   
     </div>
   </q-page>
 
@@ -14,6 +14,7 @@ import { defineComponent, onMounted } from 'vue';
 import { getAllPhones } from 'src/api/api'
 import { ref } from 'vue'
 import SinglePhone from '../components/SinglePhone.vue'
+
 
 export default defineComponent({
   name: 'PageIndex',
