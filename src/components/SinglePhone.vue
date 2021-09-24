@@ -1,7 +1,11 @@
 <template>
 
-  <q-dialog v-model="card">
+  <q-dialog v-model="deletePhone">
     <DeletePhoneDialog :phoneDetails="props._phone"/> 
+  </q-dialog>
+
+  <q-dialog v-model="viewPhone" transition-show="rotate" transition-hide="rotate">
+    <ViewPhoneDialog :phoneDetails="props._phone"/> 
   </q-dialog>
 
   <!-- phone card -->
@@ -22,16 +26,17 @@
     </div>
     
     <!-- actions -->
-    <q-card-actions class="flex flex-center">
-      <q-btn flat>
+    <q-card-actions class="actions flex flex-center">
+      <q-btn flat @click="viewPhone = true">
         <q-icon class="icon" name="visibility"/>View
       </q-btn>
 
-      <q-btn flat>
-        <q-icon class="icon" name="mode"/>Edit
+      <q-btn flat to="/editPhone">
+        <q-icon class="icon" name="mode"/>
+        Edit
       </q-btn>
 
-      <q-btn flat @click="card = true">
+      <q-btn flat @click="deletePhone = true">
         <q-icon class="icon" name="delete"/>
         <q-tooltip class="text-body2" :offset="[10, 10]">
           Delete Phone
@@ -40,20 +45,24 @@
     </q-card-actions>
 
   </q-card>
+
 </template>
 
 <script>
 import DeletePhoneDialog from '../components/DeletePhoneDialog.vue'
+import ViewPhoneDialog from '../components/ViewPhone.vue'
 import { ref } from 'vue'
 
 export default {
   props: ['_phone'],
-  components : { DeletePhoneDialog }, 
+  components : { DeletePhoneDialog, ViewPhoneDialog }, 
   setup (props) {
-    const card = ref(false)
+    const deletePhone = ref(false)
+    const viewPhone = ref(false)
 
     return {
-      card,
+      deletePhone,
+      viewPhone,
       props,
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     }
@@ -62,6 +71,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+
 .my-card
   width: 100%
   max-width: 250px
@@ -83,6 +93,5 @@ export default {
 
 .card-section
   padding: 16px 16px 0
-
 
 </style>
