@@ -25,10 +25,10 @@
         <!-- RAM and Memory -->
         <q-card-section class="q-pt-none row">
             <div class="text-subtitle1 col-6">
-                RAM: 
+                RAM: {{props.phoneDetails.ram}}
             </div>
             <div class="text-subtitle1 col-6">
-                Memory: 
+                Memory: {{props.phoneDetails.memory}}
             </div>
         </q-card-section>
 

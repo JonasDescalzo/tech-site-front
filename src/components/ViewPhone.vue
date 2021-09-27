@@ -1,5 +1,5 @@
 <template>
-    <q-card class="detailsCard">
+    <q-card class="detailsCard" style="width: 500px">
         <q-card-section>
             <q-img :src="props.phoneDetails.imageURL">
                 <div class="absolute-bottom text-h6">
@@ -10,13 +10,17 @@
 
         <q-card-section class="q-pt-none">
             <div class="text-subtitle1">Price: {{ props.phoneDetails.price }} PHP</div>
-            <p v-for="n in 4" :key="n">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum repellendus sit voluptate voluptas eveniet porro. Rerum blanditiis perferendis totam, ea at omnis vel numquam exercitationem aut, natus minima, porro labore.</p>
+            <div class="text-subtitle1">RAM: {{ props.phoneDetails.ram }}</div>
+            <div class="text-subtitle1">Memory: {{ props.phoneDetails.memory }}</div>
+            <div class="text-subtitle1">Battery: {{ props.phoneDetails.battery }}</div>
+            <div class="text-subtitle1">Main Camera: {{ props.phoneDetails.mainCamera }}</div>
         </q-card-section>
 
         <q-card-actions align="right">
             <q-btn flat label="Close" color="primary" v-close-popup />
         </q-card-actions>
     </q-card>    
+    
 </template>
 
 <script>

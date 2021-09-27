@@ -3,64 +3,97 @@
     <div class="text-h3" flat>ADD PHONE</div>  
 
     <q-page class="flex flex-center">
-      <div class="form q-pa-sm" style="max-width: 400px">
-
-        <q-form
-        @submit="onSubmit"
-        @reset="onReset"
-        class="q-gutter-sm"
-        >
-
-          <q-input
-            filled
-            v-model="name"
-            label="Model"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Please type the model']"
-          />
-
-          <q-input
-            filled
-            v-model="imageUrl"
-            label="ImageURL"
-            lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Please type the imageUrl']"
-          />
-
-          <q-input
-            filled
-            type="number"
-            v-model="price"
-            label="Price"
-            lazy-rules
-            :rules="[
-            val => val !== null && val !== '' || 'Please type the price']"
-          />
-
-
-          <q-select
-            standout="bg-teal text-white" 
-            filled
-            v-model="brand"
-            :options="options"
-            option-value="value"
-            option-label="label"
-            label="Brand" 
-            emit-value
-            map-options
-            lazy-rules
-            :rules="[
-            val => val !== null && val !== '' || 'Please select the brand']"
-          />
-          
-
-          <div>
-            <q-btn label="Submit" type="submit" color="primary"/>
-            <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-          </div>
-        </q-form>
-
+      <div class="row form q-pa-sm" style="max-width: 1500px">
         
+        <div class="col" style="max-width: 500px">
+          <q-img :src="imageUrl"></q-img>
+        </div>
+        <div class="col" style="max-width: 1000px">
+          <q-form @submit="onSubmit" @reset="onReset" class="row justify-around q-gutter-sm">
+
+            <div class="col" style="max-width: 400px">
+              <q-input
+                filled
+                v-model="name"
+                label="Model"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type the model']"
+              />
+
+              <q-input
+                filled
+                v-model="imageUrl"
+                label="ImageURL"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type the imageUrl']"
+              />
+
+              <q-input
+                filled
+                type="number"
+                v-model="price"
+                label="Price"
+                lazy-rules
+                :rules="[
+                val => val !== null && val !== '' || 'Please type the price']"
+              />
+
+              <q-select
+                standout="bg-teal text-white" 
+                filled
+                v-model="brand"
+                :options="options"
+                option-value="value"
+                option-label="label"
+                label="Brand" 
+                emit-value
+                map-options
+                lazy-rules
+                :rules="[
+                val => val !== null && val !== '' || 'Please select the brand']"
+              />
+
+              <div>
+                <q-btn label="Submit" type="submit" color="primary"/>
+                <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+              </div>
+            </div>
+            <div class="col" style="max-width: 400px">
+              <q-input
+                filled
+                v-model="ram"
+                label="RAM"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type the RAM']"
+              />
+
+              <q-input
+                filled
+                v-model="memory"
+                label="Memory"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type the Memory']"
+              />
+
+              <q-input
+                filled
+                v-model="battery"
+                label="Battery"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type the Battery']"
+              />
+
+              <q-input
+                filled
+                v-model="mainCamera"
+                label="Main Camera"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type the Main Camera']"
+              />
+            </div>
+
+          </q-form>
+        </div>
 
       </div>
     </q-page>
@@ -70,7 +103,7 @@
 
 
 <script>
-import { useQuasar } from 'quasar'
+import { colors, useQuasar } from 'quasar'
 import { ref, onMounted } from 'vue'
 import { addPhone } from 'src/api/api'
 import { useRouter } from "vue-router";
@@ -84,14 +117,20 @@ export default {
     const imageUrl = ref(null)
     const price = ref(null)
     const brand = ref()
+    const ram = ref()
+    const memory = ref()
+    const battery = ref()
+    const mainCamera = ref()
 
     onMounted(() => {
         brand.value = null
+        console.log("Add Phone page mounted")
+        console.log()
     })
 
     //function to add phones
     const addNewPhone = async () => {
-      const request = {"ModelName": name.value, "Price": price.value, "BrandId" : brand.value, "ImageURL": name.value};
+      const request = {"ModelName": name.value, "Price": price.value, "BrandId" : brand.value, "ImageURL": imageUrl.value};
       
       addPhone(request).then((res) => {
         if(res.status === 200)
@@ -107,6 +146,10 @@ export default {
       price,
       imageUrl,
       brand,
+      ram,
+      memory,
+      battery,
+      mainCamera,
       options: [
         {value: 1, label: 'Honor'}, 
         {value: 2, label: 'Cherry Mobile'}, 
@@ -123,6 +166,7 @@ export default {
 
       onReset () {
         name.value = null
+        imageUrl.value = null
         price.value = null
         brand.value = null
       }
@@ -135,14 +179,5 @@ export default {
 .form
   margin: auto
   width: 100%
-  max-width: 250px
-
-// .backgroundImage 
-//   background-image: url('https://images.unsplash.com/photo-1585060544812-6b45742d762f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2081&q=80')
-//   height: 100%
-//   background-attachment: fixed
-//   background-position: center
-//   background-repeat: no-repeat
-//   background-size: cover
 
 </style>

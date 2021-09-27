@@ -18,8 +18,8 @@
       <q-card-section class="card-section">
         <div class="text-h6">{{ _phone.modelName }}</div>
         <div class="text-subtitle1">Price: {{ _phone.price }} PHP</div>
-        <div class="text-subtitle2" flat>RAM: </div>  
-        <div class="text-subtitle2" flat>Memory: </div>  
+        <div class="text-subtitle2" flat>RAM: {{ _phone.ram }}</div>  
+        <div class="text-subtitle2" flat>Memory: {{ _phone.memory }}</div>  
         
       </q-card-section>
       

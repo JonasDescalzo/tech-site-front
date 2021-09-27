@@ -1,51 +1,25 @@
 <template>
   <div class="backgroundImage">
-    
-    <!-- phone list -->
-    <q-page class="flex flex-center">
-      <div v-for="phone in phones" :key="phone">
-        <SinglePhone :_phone="phone"/>   
-      </div>
-    </q-page>
+
+    <PhoneList />   
 
   </div>
 </template>
 
 <script>
 import { defineComponent, onMounted } from 'vue';
-import { getAllPhones } from 'src/api/api'
-import { ref } from 'vue'
-import SinglePhone from '../components/SinglePhone.vue'
+import PhoneList from '../components/PhoneList.vue'
 
 export default defineComponent({
   name: 'PageIndex',
-  components : { SinglePhone }, 
+  components : { PhoneList }, 
   setup () {
-    const phones = ref([])
-    const showPhoneDetails = ref(false)
 
     onMounted(() => {
-      console.log('Home Page')
+      console.log('Index page mounted')
     })
 
-    //function to get all phones
-    const getPhones = async () => {
-      //const response = await getAllPhones()
-      
-      getAllPhones().then((res) => {
-        if(res.status === 200)
-        {
-          phones.value = res.data;
-        }
-      })
-    }
-
-     getPhones()
-
-    return{ 
-      phones,
-      showPhoneDetails
-    }
+    return{  }
   }
 })
 </script>
@@ -59,6 +33,5 @@ export default defineComponent({
   background-position: center
   background-repeat: no-repeat
   background-size: cover
-
 
 </style>
