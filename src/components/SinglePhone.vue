@@ -31,7 +31,8 @@
         <q-icon class="icon" name="visibility"/>View
       </q-btn>
 
-      <q-btn flat to="/editPhone">
+      <!-- <q-btn flat to="/editPhone"> -->
+      <q-btn flat @click="editPhone()">
         <q-icon class="icon" name="mode"/>
         Edit
       </q-btn>
@@ -52,11 +53,13 @@
 import DeletePhoneDialog from '../components/DeletePhoneDialog.vue'
 import ViewPhoneDialog from '../components/ViewPhone.vue'
 import { ref } from 'vue'
+import { useRouter } from "vue-router";
 
 export default {
   props: ['_phone'],
   components : { DeletePhoneDialog, ViewPhoneDialog }, 
   setup (props) {
+    const router = useRouter();
     const deletePhone = ref(false)
     const viewPhone = ref(false)
 
@@ -65,6 +68,12 @@ export default {
       viewPhone,
       props,
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      editPhone(){
+        router.push({ 
+          path: '/editPhone', 
+          query: { id: props._phone.id } 
+        })
+      }
     }
   }
 }

@@ -25,6 +25,9 @@ export default defineComponent({
 
     onMounted(() => {
       console.log('PhoneList component mounted')
+
+      //call the function to get all phones
+      getPhones()
     })
 
     //function to get all phones
@@ -33,11 +36,12 @@ export default defineComponent({
             if(res.status === 200){
                 phones.value = res.data;
             }
+
+            // console.log(res)
         })
     }
 
-    //call the function to get all phones
-    getPhones()
+    
 
     return{ 
       phones,

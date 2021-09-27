@@ -103,7 +103,7 @@
 
 
 <script>
-import { colors, useQuasar } from 'quasar'
+import { useQuasar } from 'quasar'
 import { ref, onMounted } from 'vue'
 import { addPhone } from 'src/api/api'
 import { useRouter } from "vue-router";
@@ -130,7 +130,16 @@ export default {
 
     //function to add phones
     const addNewPhone = async () => {
-      const request = {"ModelName": name.value, "Price": price.value, "BrandId" : brand.value, "ImageURL": imageUrl.value};
+      const request = {
+        "ModelName": name.value, 
+        "Price": price.value, 
+        "BrandId" : brand.value, 
+        "ImageURL": imageUrl.value,
+        "RAM": ram.value,
+        "Memory": memory.value,
+        "Battery": battery.value,
+        "MainCamera": mainCamera.value,
+        };
       
       addPhone(request).then((res) => {
         if(res.status === 200)
@@ -169,6 +178,10 @@ export default {
         imageUrl.value = null
         price.value = null
         brand.value = null
+        ram.value = null
+        memory.value = null
+        battery.value = null
+        mainCamera.value = null
       }
     }
   }
