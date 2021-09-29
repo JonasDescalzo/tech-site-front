@@ -31,11 +31,16 @@
           Essential Links
         </q-item-label>
 
-        <EssentialLink
+        <div class="essentialLinks">
+          <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
-        />
+          />
+        </div>
+
+        <q-input rounded outlined label="Search Model Name" style="padding: 20px 5px 5px 5px"/>
+        
       </q-list>
     </q-drawer>
 
@@ -47,6 +52,7 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink.vue'
+import { defineComponent, ref } from 'vue'
 
 const linksList = [
   {
@@ -66,8 +72,6 @@ const linksList = [
     link: '/none'
   }
 ];
-
-import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -89,3 +93,8 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="sass" scoped>
+.essentialLinks
+  border-bottom: 1px solid #009688
+</style>

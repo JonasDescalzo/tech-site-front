@@ -1,5 +1,5 @@
 <template>
-
+    
     <div class="text-h3" flat>EDIT PHONE</div> 
 
     <q-page class="flex flex-center">
@@ -177,7 +177,7 @@ export default {
 
       onSubmit() {
         updatePhone()
-        router.push({path: '/'})
+        router.go(-1)
       },
 
     }

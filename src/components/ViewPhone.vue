@@ -16,24 +16,38 @@
             <div class="text-subtitle1">Main Camera: {{ props.phoneDetails.mainCamera }}</div>
         </q-card-section>
 
-        <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" v-close-popup />
-        </q-card-actions>
+        <div class="row">
+            <q-card-actions class="col" align="left">
+            <q-btn @click="editPhone()" flat label="Edit" color="primary" />
+            </q-card-actions>
+            <q-card-actions class="col" align="right">
+                <q-btn flat label="Close" color="primary" v-close-popup />
+            </q-card-actions>
+        </div>
+
     </q-card>    
-    
 </template>
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from "vue-router";
 
 export default {
-
     props: ['phoneDetails'],
-
     setup (props) {
         const showPhoneDetails =  ref(false)
+        const router = useRouter();
 
-        return { showPhoneDetails, props, }
+        return { 
+            showPhoneDetails, 
+            props, 
+            editPhone(){
+                router.push({ 
+                    path: '/editPhone', 
+                    query: { id: props.phoneDetails.id } 
+                })
+            }
+      }
     }
 }
 </script>
