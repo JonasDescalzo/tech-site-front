@@ -7,7 +7,12 @@ const phoneApi = {
     DeletePhone: '/api/phones/delete-phone/',
     UpdatePhone: '/api/phones/update-phone-by-id/',
 }
+
+const brandApi = {
+  GetBrands: '/api/brands/get-brands/'
+}
   
+//Phone endpoints
 export function getAllPhones (parameter) {
   return request({
     url: phoneApi.GetAllPhones,
@@ -55,6 +60,18 @@ export function deletePhoneById (parameter) {
   return request({
     url: phoneApi.DeletePhone + parameter,
     method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
+//Brand endpoints
+export function getBrands (parameter) {
+  return request({
+    url: brandApi.GetBrands,
+    method: 'get',
+    data: parameter,
     headers: {
       'Content-Type': 'application/json'
     }

@@ -105,7 +105,7 @@
 <script>
 import { useQuasar } from 'quasar'
 import { ref, onMounted } from 'vue'
-import { addPhone } from 'src/api/api'
+import { addPhone, getBrands } from 'src/api/api'
 import { useRouter } from "vue-router";
 
 export default {
@@ -121,12 +121,28 @@ export default {
     const memory = ref()
     const battery = ref()
     const mainCamera = ref()
+    const options = ref([])
 
     onMounted(() => {
         brand.value = null
         console.log("Add Phone page mounted")
-        console.log()
+        getBrandList()
+        
     })
+
+    //functions to get list of brands
+    const getBrandList = async () => {
+      getBrands().then((res) => {
+        if(res.status === 200)
+        {        
+          res.data.forEach(element => {
+            options.value.push({value: element.id, label: element.name})
+          });
+
+          console.log("getBrands success")
+        }
+      })
+    }
 
     //function to add phones
     const addNewPhone = async () => {
@@ -159,12 +175,7 @@ export default {
       memory,
       battery,
       mainCamera,
-      options: [
-        {value: 1, label: 'Honor'}, 
-        {value: 2, label: 'Cherry Mobile'}, 
-        {value: 3, label: 'Infinix'}, 
-        {value: 4, label: 'Realme'}
-      ],
+      options,
 
       onSubmit() {
         addNewPhone()
