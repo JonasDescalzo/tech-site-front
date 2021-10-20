@@ -39,7 +39,11 @@
           />
         </div>
 
-        <q-input rounded outlined label="Search Model Name" style="padding: 20px 5px 5px 5px"/>
+        <q-input rounded outlined label="Search Model Name" style="padding: 20px 5px 5px 5px">
+          <template v-slot:prepend>
+            <q-icon name="searchl" />
+          </template>
+        </q-input>
         
       </q-list>
     </q-drawer>
@@ -65,6 +69,11 @@ const linksList = [
     title: 'Add Phone',
     icon: 'add',
     link: '/addPhone/'
+  },
+  {
+    title: 'Brands',
+    icon: 'branding_watermark',
+    link: '/techBrands/'
   },
   {
     title: 'None',
